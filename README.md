@@ -1,4 +1,10 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is a registeration app for authentication user
+
+We have two pages and two step to register user.
+the first step user fill in username and password and a profile photo.
+for the second step user fill in username and password again to authorize it.
+
+we use tailwind for ui framework and use react query and typescript also.
 
 ## Getting Started
 
