@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "IRANSans";
+  src: url("../../public/fonts/IRANSans\(FaNum\)_Regular.ttf")
+    format("truetype");
+}
+
 html {
   scroll-behavior: smooth;
 }
