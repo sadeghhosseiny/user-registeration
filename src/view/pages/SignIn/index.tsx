@@ -1,7 +1,5 @@
 import { initialValues, useValidationSchemaSignIn } from "@/constants";
 import useRQGlobalState from "@/store/ReactQuery/useRQGlobalState";
-import { UserInformationTypes } from "@/types/authTypes.types";
-import Avatar from "@/view/components/Avatar";
 import Button from "@/view/components/Button/Button";
 import TextField from "@/view/components/TextField";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/20/solid";
