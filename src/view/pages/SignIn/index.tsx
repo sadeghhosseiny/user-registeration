@@ -1,3 +1,6 @@
+import { initialValues, useValidationSchemaSignIn } from "@/constants";
+import useRQGlobalState from "@/store/ReactQuery/useRQGlobalState";
+import { UserInformationTypes } from "@/types/authTypes.types";
 import Avatar from "@/view/components/Avatar";
 import Button from "@/view/components/Button/Button";
 import TextField from "@/view/components/TextField";
@@ -6,7 +9,6 @@ import { Form, Formik } from "formik";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { FunctionComponent, useState } from "react";
-import * as Yup from "yup";
 
 interface ISignInProps {}
 
@@ -15,20 +17,19 @@ const SignInForms: FunctionComponent<ISignInProps> = () => {
 
   const router = useRouter();
 
+  const [userInformation] = useRQGlobalState("userInformation", {
+    username: "",
+    password: "",
+  });
+
+  const signInValidationSchema = useValidationSchemaSignIn(userInformation);
+
   const formik = {
     onSubmit: (values: any, { setSubmitting }: any) => {
       router.push("/");
     },
-    initialValues: {
-      username: "",
-      password: "",
-    },
-    validationSchema: Yup.object().shape({
-      username: Yup.string().required("وارد کردن نام الزامی است"),
-      password: Yup.string()
-        .required("وارد کردن رمز الزامی است")
-        .min(8, "کوتاه است. رمز شما باید حداقل 8 حرف باشد."),
-    }),
+    initialValues: initialValues,
+    validationSchema: signInValidationSchema,
   };
 
   return (
