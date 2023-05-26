@@ -24,16 +24,18 @@ const Avatar: FunctionComponent<IAvatarProps> = () => {
 
   return (
     <div
-      className="icon relative flex items-center gap-5 justify-start"
+      className="icon relative flex items-center gap-5 justify-center"
       onClick={() => imagePickerRef?.current?.click()}
     >
       {!image && <Text>عکس خود را آپلود کنید</Text>}
       {image ? (
-        <div className="w-24 h-24">
+        <div className="flex justify-center w-full h-full rounded-full">
           <Image
-            className="rounded-full object-contain"
+            className="rounded-full h-[100px] object-cover"
             src={image as string}
-            fill
+            width={100}
+            height={100}
+            // fill
             alt="profile-photo"
           />
         </div>

@@ -3,20 +3,21 @@ import Button from "@/view/components/Button/Button";
 import TextField from "@/view/components/TextField";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/20/solid";
 import { Form, Formik } from "formik";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { FunctionComponent, useState } from "react";
 import * as Yup from "yup";
 
-interface ISignUpProps {}
+interface ISignInProps {}
 
-const SignUpForms: FunctionComponent<ISignUpProps> = () => {
+const SignInForms: FunctionComponent<ISignInProps> = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   const router = useRouter();
 
   const formik = {
     onSubmit: (values: any, { setSubmitting }: any) => {
-      router.push("/auth/SignIn");
+      router.push("/");
     },
     initialValues: {
       username: "",
@@ -31,7 +32,7 @@ const SignUpForms: FunctionComponent<ISignUpProps> = () => {
   };
 
   return (
-    <section>
+    <section className="w-full">
       <Formik
         initialValues={formik.initialValues}
         validationSchema={formik.validationSchema}
@@ -45,7 +46,10 @@ const SignUpForms: FunctionComponent<ISignUpProps> = () => {
           handleChange,
           handleBlur,
         }) => (
-          <Form className="flex flex-col h-full gap-5" onSubmit={handleSubmit}>
+          <Form
+            className="flex flex-col h-full max-w-8/10 mx-auto gap-5"
+            onSubmit={handleSubmit}
+          >
             <TextField
               name="username"
               id="username"
@@ -81,13 +85,19 @@ const SignUpForms: FunctionComponent<ISignUpProps> = () => {
               errors={errors}
               touched={touched}
             />
-            <Avatar />
             <Button className="mt-10 w-1/2 mx-auto">تایید</Button>
           </Form>
         )}
       </Formik>
+      <div className="flex justify-end mt-20">
+        <Link href="SignUp">
+          <Button className="bg-slate-600 hover:bg-teal-800 transition-colors transition-300">
+            بازگشت به صفحه ی قبل
+          </Button>
+        </Link>
+      </div>
     </section>
   );
 };
 
-export default SignUpForms;
+export default SignInForms;

@@ -6,6 +6,7 @@ import {
   SetStateAction,
 } from "react";
 import Text from "../Text/Text";
+import { FormikErrors, FormikTouched } from "formik";
 
 interface ITextFieldProps extends HTMLAttributes<Element> {
   component?: ElementType;
@@ -19,6 +20,9 @@ interface ITextFieldProps extends HTMLAttributes<Element> {
   icon?: JSX.Element;
   ref?: any;
   setShowPassword?: Dispatch<SetStateAction<boolean>>;
+  value: string;
+  errors: any;
+  touched: FormikTouched<Record<string, any>>;
 }
 
 const TextField: FunctionComponent<ITextFieldProps> = (props) => {
@@ -27,6 +31,9 @@ const TextField: FunctionComponent<ITextFieldProps> = (props) => {
     className,
     label,
     id,
+    name,
+    errors,
+    touched,
     direction,
     icon,
     setShowPassword,
@@ -37,25 +44,35 @@ const TextField: FunctionComponent<ITextFieldProps> = (props) => {
     "text-gray-800 w-full text-base border rounded-md p-3 focus:outline-teal-500 border-solid border-2";
 
   return (
-    <div className={`flex items-center justify-between gap-5 ${direction}`}>
-      <Text>
-        <label htmlFor={id}>{label}</label>
-      </Text>
-      {icon ? (
-        <div className="flex relative">
-          <input className={`${defaultStyle}`} {...otherProps} />
-          <div
-            onClick={() =>
-              setShowPassword && setShowPassword((prev: boolean) => !prev)
-            }
-            className="absolute p-3 z-10 bg-white left-1 top-[6px]"
-          >
-            {icon}
+    <div className={`flex flex-col justify-between gap-2 ${direction}`}>
+      <div className="flex items-center gap-5">
+        <Text>
+          <label htmlFor={id}>{label}</label>
+        </Text>
+        {icon ? (
+          <div className="flex relative flex-1">
+            <input
+              id={id}
+              name={name}
+              className={`${defaultStyle} ${className}`}
+              {...otherProps}
+            />
+            <div
+              onClick={() =>
+                setShowPassword && setShowPassword((prev: boolean) => !prev)
+              }
+              className="absolute p-3 z-10 bg-white left-1 top-[6px]"
+            >
+              {icon}
+            </div>
           </div>
-        </div>
-      ) : (
-        <input className={defaultStyle} {...otherProps} />
-      )}
+        ) : (
+          <input id={id} name={name} className={defaultStyle} {...otherProps} />
+        )}
+      </div>
+      <Text className="text-sm mr-11 text-red-500">
+        {errors?.[name] && touched?.[name] && errors?.[name]}
+      </Text>
     </div>
   );
 };

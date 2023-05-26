@@ -7,7 +7,7 @@ module.exports = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/view/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  darkMode: false,
+  darkMode: "media",
   theme: {
     screens: {
       sm: "480px",
